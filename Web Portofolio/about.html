@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Me</title>
+
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+
+  html,body{height:100%}
+
+  body{
+    position:relative;
+    height:100vh;
+    overflow:hidden;
+    background:#000;
+    font-family:'Arial Narrow','Arial',sans-serif;
+  }
+
+  .bg{
+    position:absolute;
+    inset:0;
+    background:url('background.png') center/cover no-repeat;
+    filter:brightness(.55) contrast(1.08) saturate(.9);
+    z-index:0;
+  }
+
+  a{
+    color:#fff;
+    text-decoration:none;
+  }
+
+  a:hover{
+    opacity:.75;
+  }
+
+  nav{
+    position:absolute;
+    top:3%;
+    left:1.4%;
+    display:flex;
+    gap:2.8vw;
+    font-weight:700;
+    letter-spacing:.15em;
+    font-size:.9vw;
+    text-transform:uppercase;
+    z-index:2;
+  }
+
+  h1{
+    position:absolute;
+    right:2%;
+    top:1.8%;
+    color:#fff;
+    font-weight:900;
+    font-size:8vw;
+    letter-spacing:.01em;
+    line-height:.85;
+    text-transform:uppercase;
+    margin:0;
+    z-index:2;
+  }
+
+  .copy{
+    position:absolute;
+    left:1.8%;
+    top:23%;
+    width:48%;
+    color:#fff;
+    font-size:2vw;
+    line-height:1.5;
+    z-index:2;
+  }
+
+  .copy p{
+    margin-bottom:1.6em;
+  }
+
+  .portrait{
+    position:absolute;
+    right:1%;
+    bottom:15%;
+    width:44%;
+    z-index:2;
+  }
+</style>
+</head>
+
+<body>
+
+  <div class="bg"></div>
+
+  <nav>
+    <a href="animation.html">ANIMATION</a>
+    <a href="index.html">HOME</a>
+    <a href="modeling.html">MODELING</a>
+  </nav>
+
+  <h1>About Me</h1>
+
+  <div class="copy">
+    <p>
+      Hey, I'm Equeshilm a 3D artist working across two worlds:
+      modeling and animation. To me, a piece isn't finished if it
+      only looks good standing still. I love the process of turning
+      an empty shape into a character with personality, then watching
+      it move and "speak" through animation.
+    </p>
+
+    <p>
+      I've focused on enviroment design, hard surface modeling
+      character, and animation that feels smooth and expressive.
+      On every project, I try to bring in the small details that
+      make the result stand out not just "done," but intentional.
+    </p>
+  </div>
+
+  <img class="portrait" src="icon.png" alt="Character portrait">
+
+
+  <!-- ScrollReveal -->
+  <script src="https://unpkg.com/scrollreveal"></script>
+
+  <script>
+
+    // NAVIGATION
+    ScrollReveal().reveal('nav', {
+      origin: 'left',
+      distance: '40px',
+      duration: 900,
+      delay: 200,
+      opacity: 0,
+      easing: 'cubic-bezier(0.5, 0, 0, 1)',
+      reset: false
+    });
+
+
+    // TITLE
+    ScrollReveal().reveal('h1', {
+      origin: 'right',
+      distance: '60px',
+      duration: 1000,
+      delay: 350,
+      opacity: 0,
+      easing: 'cubic-bezier(0.5, 0, 0, 1)',
+      reset: false
+    });
+
+
+    // TEXT
+    ScrollReveal().reveal('.copy', {
+      origin: 'left',
+      distance: '50px',
+      duration: 1100,
+      delay: 500,
+      opacity: 0,
+      easing: 'cubic-bezier(0.5, 0, 0, 1)',
+      reset: false
+    });
+
+
+    // PORTRAIT
+    ScrollReveal().reveal('.portrait', {
+      origin: 'right',
+      distance: '80px',
+      duration: 1200,
+      delay: 650,
+      opacity: 0,
+      scale: 0.92,
+      easing: 'cubic-bezier(0.5, 0, 0, 1)',
+      reset: false
+    });
+
+  </script>
+
+</body>
+</html>
