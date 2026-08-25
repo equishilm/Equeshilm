@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Animation</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    position:relative;
+    min-height:100vh;
+    background:#000;
+    font-family:'Arial Narrow','Arial',sans-serif;
+  }
+  .bg{
+    position:fixed; inset:0;
+    background:url('background.png') center/cover no-repeat;
+    filter:brightness(.55) contrast(1.08) saturate(.9);
+    z-index:0;
+  }
+  a{ color:#fff; text-decoration:none; }
+  a:hover{ opacity:.75; }
+
+  nav{
+    position:relative; padding:2% 0 0 1.4%;
+    display:flex; gap:2.8vw;
+    font-weight:700; letter-spacing:.15em;
+    font-size:.9vw; text-transform:uppercase;
+    z-index:2;
+  }
+
+  h1{
+    position:absolute; right:2%; top:1.8%;
+    color:#fff; font-weight:900; font-size:8vw;
+    letter-spacing:.01em; line-height:.85;
+    text-transform:uppercase; margin:0;
+    z-index:2;
+  }
+
+  .grid{
+    position:relative; z-index:2;
+    margin:6.5% 1.4% 2%;
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:1%;
+  }
+  .card{
+  position:relative;
+  aspect-ratio:280/154;
+  background:#111 center/cover no-repeat;
+  cursor:pointer;
+  border:none;
+  padding:0;
+
+  transition:
+    opacity .3s ease,
+    transform .3s ease,
+    box-shadow .3s ease;
+}
+
+.card:hover{
+  opacity:.85;
+  transform:scale(.98);
+  box-shadow:0 15px 35px rgba(0,0,0,.3);
+}
+  .card::after{
+    content:"";
+    position:absolute; inset:0; margin:auto;
+    width:15%; aspect-ratio:1/1; max-width:36px;
+    background:rgba(0,0,0,.55);
+    clip-path:polygon(20% 10%, 90% 50%, 20% 90%);
+    /* play triangle look via border trick fallback */
+  }
+
+  .avatar{
+    position:fixed; right:1.5%; bottom:1.5%;
+    width:4.5vw; z-index:2;
+  }
+
+  /* modal */
+  #modal{
+    position:fixed; inset:0; z-index:10;
+    background:rgba(0,0,0,.9);
+    display:none; align-items:center; justify-content:center;
+  }
+  #modal.open{ display:flex; }
+  #modal .frame{
+    position:relative; width:80vw; max-width:960px; aspect-ratio:16/9;
+  }
+  #modal iframe{ width:100%; height:100%; border:0; }
+  #modal .close{
+    position:absolute; top:-2.2rem; right:0;
+    color:#fff; font-size:1.5rem; cursor:pointer; background:none; border:0;
+  }
+</style>
+</head>
+<body>
+  <div class="bg"></div>
+
+  <nav>
+    <a href="about.html">ABOUT ME</a>
+    <a href="index.html">HOME</a>
+    <a href="modeling.html">MODELING</a>
+  </nav>
+
+  <h1>Animation</h1>
+
+  <div class="grid" id="grid"></div>
+
+  <img class="avatar" src="icon.png" alt="Character avatar">
+
+  <div id="modal">
+    <div class="frame">
+      <button class="close" onclick="closeModal()">✕</button>
+      <iframe id="player" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+  </div>
+
+<script src="https://unpkg.com/scrollreveal"></script>
+
+<script>
+  // Ganti tiap ID di bawah ini dengan ID video YouTube kamu
+  const VIDEO_IDS = [
+    "iiDjGVB5Vq8","qmKXR-M3in0","7FuNSb85Nu4","4oi2hL2c9k0","jXqae_dafhE",
+    "dQw4w9WgXcQ","dQw4w9WgXcQ","dQw4w9WgXcQ","dQw4w9WgXcQ","dQw4w9WgXcQ",
+    "dQw4w9WgXcQ","dQw4w9WgXcQ","dQw4w9WgXcQ","dQw4w9WgXcQ","dQw4w9WgXcQ",
+    "dQw4w9WgXcQ","dQw4w9WgXcQ","dQw4w9WgXcQ","dQw4w9WgXcQ","dQw4w9WgXcQ"
+  ];
+
+  const grid = document.getElementById('grid');
+
+  VIDEO_IDS.forEach((id, i) => {
+    const card = document.createElement('button');
+
+    card.className = 'card';
+
+    card.style.backgroundImage =
+      `url(https://img.youtube.com/vi/${id}/hqdefault.jpg)`;
+
+    card.setAttribute(
+      'aria-label',
+      `Play animation clip ${i + 1}`
+    );
+
+    card.onclick = () => openModal(id);
+
+    grid.appendChild(card);
+  });
+
+
+  /* =========================
+     SCROLL REVEAL
+  ========================= */
+
+  ScrollReveal().reveal('.card', {
+    origin: 'bottom',
+    distance: '50px',
+    duration: 800,
+    delay: 100,
+    interval: 100,
+    opacity: 0,
+    scale: 0.95,
+    easing: 'cubic-bezier(0.5, 0, 0, 1)',
+    reset: false
+  });
+
+
+  /* =========================
+     VIDEO MODAL
+  ========================= */
+
+  function openModal(id){
+    document.getElementById('player').src =
+      `https://www.youtube.com/embed/${id}?autoplay=1`;
+
+    document.getElementById('modal').classList.add('open');
+  }
+
+  function closeModal(){
+    document.getElementById('player').src = '';
+
+    document.getElementById('modal').classList.remove('open');
+  }
+
+  document.getElementById('modal').addEventListener('click', e => {
+    if(e.target.id === 'modal') {
+      closeModal();
+    }
+  });
+</script>
+</body>
+</html>

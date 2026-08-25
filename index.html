@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio</title>
+
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+
+  html,body{height:100%}
+
+  body{
+    position:relative;
+    height:100vh;
+    overflow:hidden;
+    background:#000;
+    font-family:'Arial Narrow','Arial',sans-serif;
+  }
+
+  .bg{
+    position:absolute;
+    inset:0;
+    background:url('background.png') center/cover no-repeat;
+    filter:brightness(.55) contrast(1.08) saturate(.9);
+    z-index:0;
+  }
+
+  .nav{
+    position:absolute;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:.4vw;
+    text-decoration:none;
+    outline:none;
+    -webkit-tap-highlight-color:transparent;
+    transition:opacity .2s ease;
+    z-index:2;
+  }
+
+  .nav:hover,
+  .nav:focus-visible{
+    opacity:.75;
+  }
+
+  .title{
+    color:#fff;
+    font-weight:900;
+    letter-spacing:.01em;
+    line-height:.85;
+    text-transform:uppercase;
+    white-space:nowrap;
+  }
+
+  .label{
+    color:#fff;
+    font-weight:700;
+    letter-spacing:.15em;
+    text-transform:uppercase;
+    font-size:.9vw;
+  }
+
+  /* top-left: film icon + ANIMATION label */
+  #anim-icon{
+    left:1.2%;
+    top:1.8%;
+  }
+
+  #anim-icon img{
+    width:10vw;
+  }
+
+  #anim-icon .label{
+    font-size:.85vw;
+  }
+
+  /* top-right: ANIMATION big title */
+  #anim-title{
+    right:2%;
+    top:1.8%;
+    align-items:flex-end;
+  }
+
+  #anim-title .title{
+    font-size:8vw;
+  }
+
+  /* center: character icon + ABOUT ME */
+  #about{
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+  }
+
+  #about img{
+    width:10vw;
+  }
+
+  /* bottom-left: MODELING big title */
+  #model-title{
+    left:1%;
+    bottom:1.8%;
+    align-items:flex-start;
+  }
+
+  #model-title .title{
+    font-size:8vw;
+  }
+
+  /* bottom-right: cube icon + MODELING label */
+  #model-icon{
+    right:2.5%;
+    bottom:2%;
+  }
+
+  #model-icon img{
+    width:9vw;
+  }
+
+  #model-icon .label{
+    order:-1;
+  }
+</style>
+</head>
+
+<body>
+
+  <div class="bg"></div>
+
+  <a class="nav" id="anim-icon" href="animation.html" aria-label="Animation">
+    <img src="flim.png" alt="">
+    <span class="label">ANIMATION</span>
+  </a>
+
+  <a class="nav" id="anim-title" href="animation.html" aria-label="Animation">
+    <span class="title">ANIMATION</span>
+  </a>
+
+  <a class="nav" id="about" href="about.html" aria-label="About Me">
+    <img src="icon.png" alt="">
+    <span class="label">ABOUT ME</span>
+  </a>
+
+  <a class="nav" id="model-title" href="modeling.html" aria-label="Modeling">
+    <span class="title">MODELING</span>
+  </a>
+
+  <a class="nav" id="model-icon" href="modeling.html" aria-label="Modeling">
+    <span class="label">MODELING</span>
+    <img src="cube.png" alt="">
+  </a>
+
+
+  <!-- ScrollReveal Library -->
+  <script src="https://unpkg.com/scrollreveal"></script>
+
+  <script>
+
+    // ANIMATION ICON
+    ScrollReveal().reveal('#anim-icon', {
+      origin: 'left',
+      distance: '40px',
+      duration: 1000,
+      delay: 200,
+      opacity: 0,
+      easing: 'cubic-bezier(0.5, 0, 0, 1)',
+      reset: false
+    });
+
+    // ANIMATION TITLE
+    ScrollReveal().reveal('#anim-title', {
+      origin: 'right',
+      distance: '60px',
+      duration: 1000,
+      delay: 350,
+      opacity: 0,
+      easing: 'cubic-bezier(0.5, 0, 0, 1)',
+      reset: false
+    });
+
+    // ABOUT ME
+    ScrollReveal().reveal('#about', {
+      origin: 'bottom',
+      distance: '40px',
+      duration: 1200,
+      delay: 500,
+      opacity: 0,
+      scale: 0.9,
+      easing: 'cubic-bezier(0.5, 0, 0, 1)',
+      reset: false
+    });
+
+    // MODELING TITLE
+    ScrollReveal().reveal('#model-title', {
+      origin: 'left',
+      distance: '60px',
+      duration: 1000,
+      delay: 650,
+      opacity: 0,
+      easing: 'cubic-bezier(0.5, 0, 0, 1)',
+      reset: false
+    });
+
+    // MODELING ICON
+    ScrollReveal().reveal('#model-icon', {
+      origin: 'right',
+      distance: '40px',
+      duration: 1000,
+      delay: 800,
+      opacity: 0,
+      easing: 'cubic-bezier(0.5, 0, 0, 1)',
+      reset: false
+    });
+
+  </script>
+
+</body>
+</html>
