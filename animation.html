@@ -19,8 +19,7 @@
     filter:brightness(.55) contrast(1.08) saturate(.9);
     z-index:0;
   }
-  a{ color:#fff; text-decoration:none; }
-  a:hover{ opacity:.75; }
+  a{ color:#fff; text-decoration:none; transition:color .2s ease; }
 
   nav{
     position:relative; padding:2% 0 0 1.4%;
@@ -29,9 +28,12 @@
     font-size:.9vw; text-transform:uppercase;
     z-index:2;
   }
+  nav a{ display:inline-block; transition:color .2s ease, transform .2s ease; }
+  nav a:hover, nav a:focus-visible{ color:#999; transform:scale(1.15); }
+  nav a:active{ color:#6b6b6b; transform:scale(1.04); }
 
   h1{
-    position:absolute; right:2%; top:1.8%;
+    position:absolute; right:2%; top:0%;
     color:#fff; font-weight:900; font-size:8vw;
     letter-spacing:.01em; line-height:.85;
     text-transform:uppercase; margin:0;
@@ -46,24 +48,14 @@
     gap:1%;
   }
   .card{
-  position:relative;
-  aspect-ratio:280/154;
-  background:#111 center/cover no-repeat;
-  cursor:pointer;
-  border:none;
-  padding:0;
-
-  transition:
-    opacity .3s ease,
-    transform .3s ease,
-    box-shadow .3s ease;
-}
-
-.card:hover{
-  opacity:.85;
-  transform:scale(.98);
-  box-shadow:0 15px 35px rgba(0,0,0,.3);
-}
+    position:relative;
+    aspect-ratio:280/154;
+    background:#111 center/cover no-repeat;
+    cursor:pointer;
+    border:none; padding:0;
+    transition:opacity .2s ease, transform .2s ease;
+  }
+  .card:hover{ opacity:.85; transform:scale(.98); }
   .card::after{
     content:"";
     position:absolute; inset:0; margin:auto;
@@ -117,76 +109,56 @@
     </div>
   </div>
 
-<script src="https://unpkg.com/scrollreveal"></script>
-
 <script>
   // Ganti tiap ID di bawah ini dengan ID video YouTube kamu
+  // (ID = kode setelah "v=" di URL youtube.com/watch?v=XXXXXXXXXXX)
   const VIDEO_IDS = [
-    "iiDjGVB5Vq8","qmKXR-M3in0","7FuNSb85Nu4","4oi2hL2c9k0","jXqae_dafhE",
+    "dQw4w9WgXcQ","dQw4w9WgXcQ","dQw4w9WgXcQ","dQw4w9WgXcQ","dQw4w9WgXcQ",
     "dQw4w9WgXcQ","dQw4w9WgXcQ","dQw4w9WgXcQ","dQw4w9WgXcQ","dQw4w9WgXcQ",
     "dQw4w9WgXcQ","dQw4w9WgXcQ","dQw4w9WgXcQ","dQw4w9WgXcQ","dQw4w9WgXcQ",
     "dQw4w9WgXcQ","dQw4w9WgXcQ","dQw4w9WgXcQ","dQw4w9WgXcQ","dQw4w9WgXcQ"
   ];
 
   const grid = document.getElementById('grid');
-
   VIDEO_IDS.forEach((id, i) => {
     const card = document.createElement('button');
-
     card.className = 'card';
-
-    card.style.backgroundImage =
-      `url(https://img.youtube.com/vi/${id}/hqdefault.jpg)`;
-
-    card.setAttribute(
-      'aria-label',
-      `Play animation clip ${i + 1}`
-    );
-
+    card.style.backgroundImage = `url(https://img.youtube.com/vi/${id}/hqdefault.jpg)`;
+    card.setAttribute('aria-label', `Play animation clip ${i+1}`);
     card.onclick = () => openModal(id);
-
     grid.appendChild(card);
   });
 
-
-  /* =========================
-     SCROLL REVEAL
-  ========================= */
-
-  ScrollReveal().reveal('.card', {
-    origin: 'bottom',
-    distance: '50px',
-    duration: 800,
-    delay: 100,
-    interval: 100,
-    opacity: 0,
-    scale: 0.95,
-    easing: 'cubic-bezier(0.5, 0, 0, 1)',
-    reset: false
-  });
-
-
-  /* =========================
-     VIDEO MODAL
-  ========================= */
-
   function openModal(id){
-    document.getElementById('player').src =
-      `https://www.youtube.com/embed/${id}?autoplay=1`;
-
+    document.getElementById('player').src = `https://www.youtube.com/embed/${id}?autoplay=1`;
     document.getElementById('modal').classList.add('open');
   }
-
   function closeModal(){
     document.getElementById('player').src = '';
-
     document.getElementById('modal').classList.remove('open');
   }
-
   document.getElementById('modal').addEventListener('click', e => {
-    if(e.target.id === 'modal') {
-      closeModal();
-    }
+    if(e.target.id === 'modal') closeModal();
+  });
+</script>
+
+<script src="https://unpkg.com/scrollreveal"></script>
+<script>
+  ScrollReveal().reveal('nav', {
+    origin:'left', distance:'40px', duration:900, delay:200,
+    opacity:0, easing:'cubic-bezier(0.5,0,0,1)', reset:false
+  });
+  ScrollReveal().reveal('h1', {
+    origin:'right', distance:'60px', duration:1000, delay:350,
+    opacity:0, easing:'cubic-bezier(0.5,0,0,1)', reset:false
+  });
+  ScrollReveal().reveal('.grid .card', {
+    origin:'bottom', distance:'45px', duration:800, interval:80, delay:450,
+    opacity:0, scale:0.95, easing:'cubic-bezier(0.5,0,0,1)', reset:false
+  });
+  ScrollReveal().reveal('.avatar', {
+    origin:'bottom', distance:'40px', duration:1000, delay:500,
+    opacity:0, scale:0.9, easing:'cubic-bezier(0.5,0,0,1)', reset:false
   });
 </script>
 </body>
